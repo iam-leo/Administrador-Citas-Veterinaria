@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Administrador de Pacientes</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+</head>
+<body>
+    <h2 class="text-center my-5 titulo">Administrador de Pacientes de Veterinaria</h2>
+    <div class="container mt-5 p-5">
+        <div id="contenido" class="row">
+            <div class="col-md-6 agregar-cita">
+                <form id="nueva-cita">
+                    <legend class="mb-4">Datos del Paciente</legend>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-lg-4 col-form-label">Nombre Mascota:</label>
+                        <div class="col-sm-8 col-lg-8">
+                            <input type="text" id="mascota" name="mascota" class="form-control" placeholder="Nombre Mascota" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-lg-4 col-form-label">Propietario:</label>
+                        <div class="col-sm-8 col-lg-8">
+                            <input type="text" id="propietario" name="propietario" class="form-control"  placeholder="Nombre Dueño de la Mascota" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-lg-4 col-form-label">Teléfono:</label>
+                        <div class="col-sm-8 col-lg-8">
+                            <input type="tel" id="telefono" name="telefono" class="form-control"  placeholder="Número de Teléfono" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-lg-4 col-form-label">Fecha:</label>
+                        <div class="col-sm-8 col-lg-8">
+                            <input type="date" id="fecha" name="fecha" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-lg-4 col-form-label">Hora:</label>
+                        <div class="col-sm-8 col-lg-8">
+                            <input type="time" id="hora" name="hora" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-lg-4 col-form-label">Sintomas:</label>
+                        <div class="col-sm-8 col-lg-8">
+                            <textarea id="sintomas" name="sintomas" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                            <button id="crear-cita"type="submit" class="btn btn-success w-100 d-block">Crear Cita</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <h2 id="administra" class="mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                  </svg>
+                  Administrar citas:
+                </h2>
+                <ul id="citas" class="list-group lista-citas"></ul>
+            </div>
+        </div> <!--.row-->
+    </div><!--.container-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.4.0/dist/sweetalert2.all.min.js"></script>
+    <script src="js/app.js"></script>
+
+</body>
+</html>
