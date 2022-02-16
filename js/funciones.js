@@ -9,8 +9,10 @@ import { mascotaInput,
          form
 } from './selectores.js';
 
+import { DB } from './indexedDB.js';
+
 //Instancias
-const ui = new UI();
+export const ui = new UI();
 const administrarCitas = new Citas();
 
 let editando;
@@ -41,16 +43,29 @@ export function nuevaCita(e){
     }
 
     if(editando){
-        ui.mostrarAlerta('Editado correctamente.', 'success');
 
         //Pasar el objeto de la cita a edición
-        administrarCitas.editarCita({...citaObj})
+        administrarCitas.editarCita({...citaObj});
+
+        //Editar en indexedDB
+        const transaction = DB.transaction(['citas'], 'readwrite');
+        const objStore = transaction.objectStore('citas');
+
+        objStore.put(citaObj);
+
+        transaction.oncomplete = () =>{
+            ui.mostrarAlerta('Editado correctamente.', 'success');
 
         //Regresar el texto del boton a "Crear cita"
         form.querySelector('button[type="submit"]').textContent = 'Crear cita';
 
-        //quitar modo edición
+        //Quitar modo edición
         editando = false;
+        }
+
+        transaction.onerror = () =>{
+            console.log('Hubo un error al editar cita');
+        }
 
     }else{
         //Generar id para cada cita
@@ -59,8 +74,18 @@ export function nuevaCita(e){
         //Creando nueva cita
         administrarCitas.agregarCita({...citaObj}) //Pasar copia del objeto, sino reescribiria el obj
 
-        //Alerta correcto
-        ui.mostrarAlerta('La cita se agregó correctamente.', 'success')
+        //Insertar registro en IndexedDB
+        const transaction = DB.transaction(['citas'], 'readwrite');
+
+        const objStore = transaction.objectStore('citas');
+
+        objStore.add(citaObj);
+
+        transaction.oncomplete = () =>{
+            console.log('Cita agregada');
+            //Alerta correcto
+            ui.mostrarAlerta('La cita se agregó correctamente.', 'success');
+        }
     }
 
     reiniciarObj();
@@ -69,7 +94,7 @@ export function nuevaCita(e){
     form.reset();
 
     //Mostrar HTML de las citas
-    ui.imprimirCitas(administrarCitas);
+    ui.imprimirCitas();
 }
 
 //Reiniciar objeto
@@ -84,13 +109,24 @@ export function reiniciarObj(){
 
 export function eliminarCita(id){
     //Eliminar cita
-    administrarCitas.eliminarCita(id);
+    const transaction = DB.transaction(['citas'], 'readwrite');
+    const objStore = transaction.objectStore('citas');
 
-    //Mostrar mensaje
-    ui.mostrarAlerta('La cita se eliminó correctamente.', 'success');
+    objStore.delete(id);
 
-    //Refrescar citas
-    ui.imprimirCitas(administrarCitas);
+    //Si todo salió bien
+    transaction.oncomplete = () =>{
+        //Mostrar mensaje
+        ui.mostrarAlerta('La cita se eliminó correctamente.', 'success');
+
+        //Refrescar citas
+        ui.imprimirCitas();
+    }
+
+    //Si hubo un error
+    transaction.onerror = () =>{
+        console.log('Hubo un error al eliminar cita');
+    }
 }
 
 //Cargar datos y modo edicion

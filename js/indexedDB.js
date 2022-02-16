@@ -1,4 +1,5 @@
-let DB;
+import { ui }  from './funciones.js';
+export let DB;
 
 export default function crearDB(){
     //Crear la BD version 1.0
@@ -14,6 +15,8 @@ export default function crearDB(){
         console.log('BD creada exitosamente');
         DB = DataBase.result;
         console.log(DB);
+        //Mostrar citas al cargar (pero indexedDB ya está listo)
+        ui.imprimirCitas();
     }
 
     //Configuracion de la DB
