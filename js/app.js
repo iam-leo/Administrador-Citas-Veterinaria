@@ -1,7 +1,11 @@
 import App from "./classes/App.js";
+import crearDB from "./indexedDB.js";
 
+window.onload = () =>{
+    const app = new App();
+    crearDB();
+}
 
-const app = new App();
 // eventListeners()
 
 // function eventListeners(){

@@ -10,10 +10,10 @@ import { mascotaInput,
 
 class App{
     constructor(){
-        this.initiApp();
+        this.initApp();
     }
 
-    initiApp(){
+    initApp(){
         mascotaInput.addEventListener('input', datosCita);
         propietarioInput.addEventListener('input', datosCita);
         telefonoInput.addEventListener('input', datosCita);
