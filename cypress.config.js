@@ -15,6 +15,5 @@ module.exports = defineConfig({
     
     return config;
     },
-    videoCompression: 0
   },
 });
