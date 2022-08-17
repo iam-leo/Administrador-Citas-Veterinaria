@@ -1,0 +1,22 @@
+{
+  "name": "26-proyecto-administrarcitas",
+  "version": "1.0.0",
+  "description": "Web App administrador de citas de pacientes de veterinaria",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iam-leo/Administrador-Citas-Veterinaria.git"
+  },
+  "author": "Leo Ss",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iam-leo/Administrador-Citas-Veterinaria/issues"
+  },
+  "homepage": "https://github.com/iam-leo/Administrador-Citas-Veterinaria#readme",
+  "devDependencies": {
+    "cypress": "^10.6.0"
+  }
+}
